@@ -1,5 +1,5 @@
 /*
- * PQC Keychain Generator - FINAL VERSION (2026)
+ * PQC Keychain Generator (2026)
  * Ternary SPX-QEC distillation pipeline now DRIVES all keys
  * Schemes: Falcon-512 + ML-DSA-65 + SLH-DSA-SHA2-128s (SPHINCS+)
  * Roles: Master + 9 roles (0-8)
@@ -36,7 +36,7 @@ static void custom_randombytes(uint8_t *output, size_t len) {
     }
 }
 
-/* ==================== YOUR ORIGINAL TERNARY FUNCTIONS (unchanged) ==================== */
+/* ==================== ORIGINAL TERNARY FUNCTIONS ==================== */
 static char *generate_high_entropy_seed(void) {
     unsigned char raw[64];
     OQS_randombytes(raw, sizeof(raw));
@@ -242,7 +242,7 @@ static void generate_keypair_set(const char *algo, unsigned char **pk, size_t *p
     OQS_SIG_free(sig);
 }
 
-/* ==================== FILE I/O (unchanged) ==================== */
+/* ==================== FILE I/O ==================== */
 static char *get_timestamp_filename(void) {
     time_t now = time(NULL);
     struct tm *tm_info = localtime(&now);
@@ -311,7 +311,7 @@ int main(void) {
     }
     printf("\n");
 
-    /* Build JSON (same as before) */
+    /* Build JSON */
     printf("Building JSON keychain...\n");
     json_t *root = json_object();
 
@@ -374,7 +374,7 @@ int main(void) {
     json_dump_file(root, filename, JSON_INDENT(2));
     printf("✅ Keychain saved to: %s\n\n", filename);
 
-    /* cleanup (omitted for brevity but identical to previous version) */
+    /* cleanup */
     free(final_trits); free(master_pool_hex); free(falcon_pk_hex); free(falcon_sk_hex);
     free(dilithium_pk_hex); free(dilithium_sk_hex); free(sphincs_pk_hex); free(sphincs_sk_hex);
     free(timestamp); free(filename);
