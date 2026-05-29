@@ -1,6 +1,6 @@
 /*
- * PQC Hybrid SPHINCS+BTC Signer - PRODUCTION READY 2026
- * Real BTC ECDSA + SPHINCS+ wrapper with Parallel Journeymen + 4D collapses + SPX-QEC
+ * PQC Hybrid SPHINCS+BTC Signer (2026)
+ * ECDSA + SPHINCS+ wrapper with Parallel Journeymen + 4D collapses + SPX-QEC
  * Usage: ./pqc_hybrid_signer <kchain_file> <role_number> "message to sign"
  */
 #include <stdio.h>
@@ -16,7 +16,7 @@
 
 #define TERNARY_LENGTH 6000
 
-/* ==================== SPX-QEC (exact original) ==================== */
+/* ==================== SPX-QEC ==================== */
 static const char *BASE_PATTERNS[] = {
     "00", "11", "01", "10", "100", "011", "101", "010",
     "1001", "0110", "10100", "01011", "001101"
@@ -223,7 +223,7 @@ int main(int argc, char** argv) {
     unsigned char* final_sig = NULL; size_t final_sig_len = 0;
     hybrid_sign(hybrid_sk, sk_len, btc_sig, btc_sig_len, message, &final_sig, &final_sig_len);
 
-    printf("✅ Hybrid SPHINCS+BTC Signature (faux base58 - looks exactly like a normal Bitcoin signature):\n");
+    printf("✅ Hybrid SPHINCS+BTC Signature (faux base58: looks exactly like a normal Bitcoin signature):\n");
     printf("%s\n\n", final_sig);
     printf("Inner BTC ECDSA part is fully verifiable on Bitcoin Core and every wallet today.\n");
     printf("Outer SPHINCS+ wrapper provides quantum resistance.\n");
